@@ -1,0 +1,53 @@
+version: '3.7'
+
+volumes:
+  db_data:
+
+services:
+  server:
+    build:
+      context: ./iot-vega-server
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8001:8001/udp"
+      - "8002:8002"
+
+  db:
+    image: mysql:8.0.28
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_PASS}"
+      MYSQL_DATABASE: "${DB_NAME}"
+
+  admin-tool:
+    build:
+      context: ./iot-vega-admin
+    restart: always
+    depends_on:
+      - server
+    ports:
+      - "8003:80"
+
+  pulse:
+    build:
+      context: ./iot-vega-pulse
+    restart: always
+    depends_on:
+      - server
+    ports:
+      - "8004:80"
+
+  phpmyadmin:
+    image: phpmyadmin:5.1.1
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - PMA_HOST=db
+    ports:
+      - "8005:80"
