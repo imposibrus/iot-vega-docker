@@ -63,7 +63,7 @@ services:
       - ~/.ssh:/root/.ssh:ro
     environment:
       - RESTIC_PASSWORD
+      - RESTIC_REPOSITORY
       - RESTIC_TAG=docker-data
       - BACKUP_CRON=30 0 * * * # time in UTC
       - RESTIC_FORGET_ARGS=--keep-daily 14 --keep-weekly 6 --keep-monthly 12 --keep-yearly 10
-      - RESTIC_REPOSITORY=sftp:backup@synology.ziondev.ru:/lora-server
