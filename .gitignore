@@ -1,2 +1,3 @@
 .env
 iot-vega-server/settings.conf
+traefik/conf.d/acme.json

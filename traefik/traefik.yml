@@ -1,0 +1,39 @@
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: true
+
+entryPoints:
+  web:
+    address: :80
+
+  websecure:
+    address: :443
+
+certificatesResolvers:
+  default:
+    acme:
+      email: admin@ft-ru.ru
+      storage: /etc/traefik/conf.d/acme.json
+      httpChallenge:
+        entryPoint: web
+#log:
+#  level: DEBUG
+#  filePath: log/traefik.log
+#  format: json
+
+accessLog:
+#  filePath: /path/to/log/log.txt
+  format: common
+
+#api:
+#  insecure: true
+#  dashboard: false
+
+#ping:
+#  entryPoint: traefik
+
+providers:
+  docker:
+#    endpoint: tcp://10.10.10.10:2375
+#    defaultRule: Host(`{{ normalize .Name }}.docker.localhost`)
+    exposedByDefault: false

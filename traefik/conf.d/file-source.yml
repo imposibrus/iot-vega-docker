@@ -1,0 +1,30 @@
+http:
+  services:
+    some-server:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.1:3000"
+  
+  routers:
+    some:
+      rule: "Host(`some.example.com`)"
+      service: some-server
+#    some-tls:
+#      rule: "Host(`some.example.com`)"
+#      service: some-server
+#      tls:
+#        certResolver: default
+
+
+#tcp:
+#  services:
+#    postgres-server:
+#      loadBalancer:
+#        servers:
+#          - address: "host.docker.internal:5432"
+#
+#  routers:
+#    postgres:
+#      rule: "HostSNI(`postgres.example.com`)"
+#      service: postgres-server
+#
