@@ -15,6 +15,10 @@ http:
 #      tls:
 #        certResolver: default
 
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
 
 #tcp:
 #  services:

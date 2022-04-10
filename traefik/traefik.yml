@@ -25,9 +25,9 @@ accessLog:
 #  filePath: /path/to/log/log.txt
   format: common
 
-#api:
-#  insecure: true
-#  dashboard: false
+api:
+  insecure: true
+  dashboard: true
 
 #ping:
 #  entryPoint: traefik
