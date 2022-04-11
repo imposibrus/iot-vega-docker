@@ -1,3 +1,6 @@
 [submodule "restic-pg-dump-docker"]
 	path = restic-pg-dump-docker
 	url = https://github.com/imposibrus/restic-pg-dump-docker.git
+[submodule "IotVegaTimeCorrector"]
+	path = IotVegaTimeCorrector
+	url = https://github.com/imposibrus/IotVegaTimeCorrector.git

@@ -116,6 +116,13 @@ services:
 #      - "traefik.http.services.phpmyadmin-service.loadbalancer.server.port=80"
 #
 
+  time-corrector:
+    build: ./IotVegaTimeCorrector
+    restart: always
+    init: true
+    volumes:
+      - ./time-corrector.config.ini:/app/config.ini
+
   restic-pg:
     build: ./restic-pg-dump-docker
     restart: always
