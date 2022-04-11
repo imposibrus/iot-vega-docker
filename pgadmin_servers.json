@@ -1,0 +1,13 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "lorawan_server",
+            "Group": "Servers",
+            "Port": 5432,
+            "Username": "lorawan_server",
+            "Host": "pg",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "postgres"
+        }
+    }
+}

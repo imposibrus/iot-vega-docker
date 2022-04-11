@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   pgdata:
+  pgadmin_data:
 
 services:
   traefik:
@@ -97,29 +98,41 @@ services:
 
       - "traefik.http.services.pulse-service.loadbalancer.server.port=80"
 
-#  phpmyadmin:
-#    image: phpmyadmin:5.1.1
-#    restart: always
-#    depends_on:
-#      - db
-#    environment:
-#      - PMA_HOST=db
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.local`)"
-#      - "traefik.http.routers.phpmyadmin.service=phpmyadmin-service"
-#
-##      - "traefik.http.routers.phpmyadmin-tls.rule=Host(`phpmyadmin.local`)"
-##      - "traefik.http.routers.phpmyadmin-tls.tls=true"
-##      - "traefik.http.routers.phpmyadmin-tls.service=phpmyadmin-service"
-#
-#      - "traefik.http.services.phpmyadmin-service.loadbalancer.server.port=80"
-#
+  pgadmin:
+    image: dpage/pgadmin4:6.8
+    restart: always
+    mem_limit: 300m
+    memswap_limit: 1g
+    cpu_shares: 2
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin_servers.json:/pgadmin4/servers.json
+    depends_on:
+      - pg
+    environment:
+      - PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD
+      - PGADMIN_DISABLE_POSTFIX=1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.local`) || Host(`vega-pgadmin.ziondev.ru`)"
+      - "traefik.http.routers.pgadmin.service=pgadmin-service"
+      - "traefik.http.routers.pgadmin.middlewares=redirect-to-https"
+
+      - "traefik.http.routers.pgadmin-tls.rule=Host(`vega-pgadmin.ziondev.ru`)"
+      - "traefik.http.routers.pgadmin-tls.tls.certResolver=default"
+      - "traefik.http.routers.pgadmin-tls.service=pgadmin-service"
+
+      - "traefik.http.services.pgadmin-service.loadbalancer.server.port=80"
+
 
   time-corrector:
     build: ./IotVegaTimeCorrector
     restart: always
     init: true
+    mem_limit: 300m
+    memswap_limit: 1g
+    cpu_shares: 2
     volumes:
       - ./time-corrector.config.ini:/app/config.ini
 
