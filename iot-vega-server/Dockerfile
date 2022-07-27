@@ -22,4 +22,7 @@ WORKDIR /opt/iot-vega-server
 
 ENV LD_LIBRARY_PATH=/opt/iot-vega-server
 
-CMD ["/opt/iot-vega-server/iot-vega-server"]
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
+RUN chmod +x /wait
+
+CMD /wait && /opt/iot-vega-server/iot-vega-server
