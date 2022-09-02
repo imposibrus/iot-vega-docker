@@ -37,3 +37,6 @@ providers:
 #    endpoint: tcp://10.10.10.10:2375
 #    defaultRule: Host(`{{ normalize .Name }}.docker.localhost`)
     exposedByDefault: false
+
+  file:
+    directory: '/etc/traefik/conf.d/'

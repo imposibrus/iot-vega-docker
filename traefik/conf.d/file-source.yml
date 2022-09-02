@@ -1,19 +1,19 @@
 http:
   services:
-    some-server:
+    win10-1c:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.1:3000"
+          - url: "http://192.168.89.80:80"
   
   routers:
     some:
-      rule: "Host(`some.example.com`)"
-      service: some-server
-#    some-tls:
-#      rule: "Host(`some.example.com`)"
-#      service: some-server
-#      tls:
-#        certResolver: default
+      rule: "Host(`1c.ziondev.ru`) || Host(`triniti.ziondev.ru`)"
+      service: win10-1c
+    some-tls:
+      rule: "Host(`1c.ziondev.ru`) || Host(`triniti.ziondev.ru`)"
+      service: win10-1c
+      tls:
+        certResolver: default
 
   middlewares:
     redirect-to-https:
