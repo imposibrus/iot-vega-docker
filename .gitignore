@@ -3,4 +3,5 @@ iot-vega-server/settings.conf
 traefik/conf.d/acme.json
 .idea/
 time-corrector.config.ini
+notifier-lite.config.ini
 

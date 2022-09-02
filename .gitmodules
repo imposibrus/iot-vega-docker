@@ -4,3 +4,6 @@
 [submodule "IotVegaTimeCorrector"]
 	path = IotVegaTimeCorrector
 	url = https://github.com/imposibrus/IotVegaTimeCorrector.git
+[submodule "IotVegaNotifierLite"]
+	path = IotVegaNotifierLite
+	url = https://github.com/imposibrus/IotVegaNotifierLite.git
