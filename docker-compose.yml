@@ -185,12 +185,14 @@ services:
     restart: always
     cpus: 2.5
     volumes:
-      - $PWD:/data:ro
+      - $PWD:/data/src:ro
+      - pgdata:/data/pgdata:ro
+      - pgadmin_data:/data/pgadmin_data:ro
       - ~/.ssh:/root/.ssh:ro
     environment:
       - RESTIC_PASSWORD
       - RESTIC_REPOSITORY
-      - RESTIC_TAG=iot-vega-src
+      - RESTIC_TAG=iot-vega-src_pgdata_pgadmin-data
       - BACKUP_CRON=34 1 * * * # time in UTC
       - RESTIC_FORGET_ARGS=--keep-daily 14 --keep-weekly 6 --keep-monthly 12 --keep-yearly 10
 
